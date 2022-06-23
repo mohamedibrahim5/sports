@@ -8,24 +8,59 @@
 import UIKit
 import SafariServices
 class LeaguesDetailesViewController:UIViewController {
+  
+    
+   
+    @IBOutlet weak var collection4up: UICollectionView!
+    @IBAction func back(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    var isChecked: Bool = false {
+           didSet {
+               if isChecked == true {
+               } else {
+               }
+           }
+       }
+
+    var ischecked : Bool?
     var db = DBmanger.sharedInstance
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
-   
+ 
     @IBOutlet weak var tableview: UITableView!
+    
+   
+    @IBOutlet weak var fav: UIButton!
     @IBAction func favourite(_ sender: UIButton) {
-        db.addimageandytblink(appDelegate: appDelegate,strname: checkstrname, strimage: checkimage, stryoutbe: checkyoutube)
+        if isChecked == true {
+            fav.setTitle("fav", for: .normal)
+            isChecked = !isChecked
+        }
+       
+            print(isChecked)
+        if isChecked == false{
+            fav.setTitle("unfav", for: .normal)
+            db.addimageandytblink(appDelegate: appDelegate,strname: checkstrname, strimage: checkimage, stryoutbe: checkyoutube, strid: id)
+            isChecked = !isChecked
+        }
     }
     var checkstrname:String = ""
     var checkimage : String = ""
     var checkyoutube : String = ""
+    var id :String = ""
     var checkarrstr:[String] = []
     var leaguesDetailes = [LeaguesDetaile]()
     var leg:League?
     var eventdetailes = [Event]()
+    
     @IBOutlet weak var collection: UICollectionView!
+    
+    
+    var latestevent = [LatestEvent]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        collection4up.register(UINib(nibName: "CollectionViewCellup2", bundle: nil), forCellWithReuseIdentifier: "cellup2")
         tableview.delegate = self
         tableview.dataSource = self
         checkarrstr = checkstrname.components(separatedBy: " ")
@@ -33,29 +68,37 @@ class LeaguesDetailesViewController:UIViewController {
         
         let leaguPresenter : LeaguesDetailesPresenter = LeaguesDetailesPresenterr(LeaguesDetailes: self)
         let eventPresenter : EventPresenterr = EventPresenterr(LeaguesDetailes: self)
+        let latestevent : LatestEventsPresenter = LatestEventPresenterr(LeaguesDetailes: self)
         switch (checkarrstr.count)
         {
         case 1 :
             leaguPresenter.fetchData(endPoint: "\(checkarrstr[0])")
             eventPresenter.fetchData(endPoint: "\(checkarrstr[0])")
+            latestevent.fetchData(endPoint: "\(checkarrstr[0])_2021")
         case 2 :
             leaguPresenter.fetchData(endPoint: "\(checkarrstr[0])_\(checkarrstr[1])")
             eventPresenter.fetchData(endPoint: "\(checkarrstr[0])_\(checkarrstr[1])")
+            latestevent.fetchData(endPoint: "\(checkarrstr[0])_\(checkarrstr[1])_2021")
         case 3:
             leaguPresenter.fetchData(endPoint: "\(checkarrstr[0])_\(checkarrstr[1])_\(checkarrstr[2])")
             eventPresenter.fetchData(endPoint: "\(checkarrstr[0])_\(checkarrstr[1])_\(checkarrstr[2])")
+            latestevent.fetchData(endPoint: "\(checkarrstr[0])_\(checkarrstr[1])_\(checkarrstr[2])_2021")
         case 4 :
             leaguPresenter.fetchData(endPoint: "\(checkarrstr[0])_\(checkarrstr[1])_\(checkarrstr[2])_\(checkarrstr[3])")
             eventPresenter.fetchData(endPoint: "\(checkarrstr[0])_\(checkarrstr[1])_\(checkarrstr[2])_\(checkarrstr[3])")
+            latestevent.fetchData(endPoint: "\(checkarrstr[0])_\(checkarrstr[1])_\(checkarrstr[2])_\(checkarrstr[3])_2021")
         case 5 :
             leaguPresenter.fetchData(endPoint: "\(checkarrstr[0])_\(checkarrstr[1])_\(checkarrstr[2])_\(checkarrstr[3])_\(checkarrstr[4])")
             eventPresenter.fetchData(endPoint: "\(checkarrstr[0])_\(checkarrstr[1])_\(checkarrstr[2])_\(checkarrstr[3])_\(checkarrstr[4])")
+            latestevent.fetchData(endPoint: "\(checkarrstr[0])_\(checkarrstr[1])_\(checkarrstr[2])_\(checkarrstr[3])_\(checkarrstr[4])_2021")
         case 6 :
             leaguPresenter.fetchData(endPoint: "\(checkarrstr[0])_\(checkarrstr[1])_\(checkarrstr[2])_\(checkarrstr[3])_\(checkarrstr[4])_\(checkarrstr[5])")
             eventPresenter.fetchData(endPoint: "\(checkarrstr[0])_\(checkarrstr[1])_\(checkarrstr[2])_\(checkarrstr[3])_\(checkarrstr[4])_\(checkarrstr[5])")
+            latestevent.fetchData(endPoint: "\(checkarrstr[0])_\(checkarrstr[1])_\(checkarrstr[2])_\(checkarrstr[3])_\(checkarrstr[4])_\(checkarrstr[5])_2021")
         case 7 :
-            leaguPresenter.fetchData(endPoint: "\(checkarrstr[0])_\(checkarrstr[1])_\(checkarrstr[2])_\(checkarrstr[3])_\(checkarrstr[4])_\(checkarrstr[5])_\(checkarrstr[6])")
-            eventPresenter.fetchData(endPoint: "\(checkarrstr[0])_\(checkarrstr[1])_\(checkarrstr[2])_\(checkarrstr[3])_\(checkarrstr[4])_\(checkarrstr[5])_\(checkarrstr[6])")
+            leaguPresenter.fetchData(endPoint: "\(checkarrstr[0])_\(checkarrstr[1])_\(checkarrstr[2])_\(checkarrstr[3])_\(checkarrstr[4])_\(checkarrstr[5])_\(checkarrstr[6])_2021")
+            eventPresenter.fetchData(endPoint: "\(checkarrstr[0])_\(checkarrstr[1])_\(checkarrstr[2])_\(checkarrstr[3])_\(checkarrstr[4])_\(checkarrstr[5])_\(checkarrstr[6])_2021")
+            latestevent.fetchData(endPoint: "\(checkarrstr[0])_\(checkarrstr[1])_\(checkarrstr[2])_\(checkarrstr[3])_\(checkarrstr[4])_\(checkarrstr[5])_\(checkarrstr[6])_2021")
         default :
             showalert()
         }
@@ -63,57 +106,55 @@ class LeaguesDetailesViewController:UIViewController {
     }
 }
 
-extension LeaguesDetailesViewController : LeaguesDetailesView{
-    func renderHomeView(leagues: [LeaguesDetaile]) {
-        self.leaguesDetailes = self.leaguesDetailes + leagues
-
-        DispatchQueue.main.async {
-            self.collection.reloadData()
-        }
-    }
-
-    func postErrorHomeView(error: Error) {
-        print(error.localizedDescription)
-    }
 
 
-}
 
-
-extension LeaguesDetailesViewController:UICollectionViewDelegate,UICollectionViewDataSource{
+extension LeaguesDetailesViewController:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        if collectionView == collection {
+        
+        if collectionView == collection4up{
+            return latestevent.count
+        }
+
             return leaguesDetailes.count
-//        }else  {
-//            return 10
-//        }
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        if collectionView == collection{
+        if collectionView == collection4up{
+            let cell = collection4up.dequeueReusableCell(withReuseIdentifier: "cellup2", for: indexPath) as! CollectionViewCellup2
+            cell.event.text = latestevent[indexPath.row].strEvent
+            cell.home.text = latestevent[indexPath.row].intHomeScore
+            cell.away.text = latestevent[indexPath.row].intAwayScore
+            return cell
+        }
             let cell = collection.dequeueReusableCell(withReuseIdentifier: "celldown", for: indexPath) as! LeaguesDetailesCollectionViewCelldown
             cell.imagev.roundImg()
             cell.imagev.loadFrom(URLAddress: leaguesDetailes[indexPath.row].strTeamBadge ?? "")
             return cell
-//        }else  {
-//            let cell = collection.dequeueReusableCell(withReuseIdentifier: "cellup", for: indexPath) as! LeaguesDetailesCollectionViewCellup
-//            cell.textlabel2.text = "mo"
-//            return cell
-//        }
         
     }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        if collectionView == collection{
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "cellteam") as! ViewController2
-            vc.team = leaguesDetailes[indexPath.row]
-            navigationController?.pushViewController(vc, animated: true)
-//        }else {
-//            print("yarb")
-//        }
-       
-
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == collection4up{
+            return CGSize(width: self.view.frame.width*0.99, height: self.view.frame.width*0.5)
+        }
+        return CGSize(width: self.view.frame.width*0.45, height: self.view.frame.width*0.5)
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == collection4up{
+        }
+        if collectionView == collection{
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "cellteam") as! ViewController2
+       //     present(vc, animated: true, completion: nil)
+            vc.team = leaguesDetailes[indexPath.row]
+        //  navigationController?.pushViewController(vc, animated: true)
+            present(vc, animated: true, completion: nil)
+        }
+    }
+   
     
 }
 
@@ -137,8 +178,8 @@ extension LeaguesDetailesViewController : UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableview.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LeaguesDetailesTableViewCell
         cell.event.text = eventdetailes[indexPath.row].strEvent
-        cell.data.text = eventdetailes[indexPath.row].dateEvent
-        cell.time.text = eventdetailes[indexPath.row].strTime
+        cell.data.text = eventdetailes[indexPath.row].strTime
+        cell.time.text = eventdetailes[indexPath.row].dateEvent
         return cell
     }
     
@@ -157,4 +198,35 @@ extension LeaguesDetailesViewController : EventsView{
            }
         
     }
+}
+
+extension LeaguesDetailesViewController : LatestEventsView{
+    func renderHomeView(users: [LatestEvent]) {
+      //  self.eventdetailes = self.eventdetailes + users
+        self.latestevent = self.latestevent + users
+        DispatchQueue.main.async {
+            self.collection4up.reloadData()
+        }
+        func postErrorHomeView(error: Error) {
+              print(error.localizedDescription)
+           }
+        
+    }
+}
+
+extension LeaguesDetailesViewController : LeaguesDetailesView{
+    func renderHomeView(leagues: [LeaguesDetaile]) {
+        self.leaguesDetailes = self.leaguesDetailes + leagues
+
+        DispatchQueue.main.async {
+            self.collection.reloadData()
+           
+        }
+    }
+
+    func postErrorHomeView(error: Error) {
+        print(error.localizedDescription)
+    }
+
+
 }

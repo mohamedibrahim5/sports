@@ -9,7 +9,11 @@ import UIKit
 
 class HomeCollectionViewCell: UICollectionViewCell {
  
-    @IBOutlet weak var imageview: UIImageView!
     @IBOutlet weak var textlabel: UILabel!
+    @IBOutlet weak var imageview: UIImageView!
+    func setValues(name:String,image:String){
+        self.textlabel.text = name
+        self.imageview.loadFrom(URLAddress: "image")
+    }
 
 }

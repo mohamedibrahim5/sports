@@ -23,3 +23,7 @@ protocol leaguesDetaliesService {
 protocol EventsService {
     func fetchLeagues (endPoint: String, completion: @escaping (([Event]?, Error?) -> Void))
 }
+
+protocol LatestEventsService {
+    func fetchLeagues (endPoint: String, completion: @escaping (([LatestEvent]?, Error?) -> Void))
+}

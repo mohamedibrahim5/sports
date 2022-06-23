@@ -64,7 +64,9 @@ extension DBmanger {
         
     }
     
-    func addimageandytblink(appDelegate : AppDelegate ,strname : String, strimage : String,stryoutbe:String){
+    func addimageandytblink(
+        appDelegate : AppDelegate ,strname : String, strimage : String,stryoutbe:String,strid:String
+    ){
         let managedContext = appDelegate.persistentContainer.viewContext
         
         if let entity = NSEntityDescription.entity(forEntityName: "Fav", in: managedContext){
@@ -72,6 +74,7 @@ extension DBmanger {
             leg1.setValue(strname, forKey: "name")
             leg1.setValue(strimage, forKey: "image")
             leg1.setValue(stryoutbe, forKey: "sport")
+            leg1.setValue(strid, forKey: "id")
             do{
                 try managedContext.save()
                 print("data is saved")

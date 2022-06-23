@@ -19,8 +19,7 @@ class favouriteTableViewCell: UITableViewCell {
     @IBOutlet weak var imageview: UIImageView!
     @IBOutlet weak var textlabel: UIView!
     @IBAction func youtubebutton(_ sender: UIButton) {
-        print("hello")
-        gotoyoutube?.getlink(endpoint: link!)
+    gotoyoutube?.getlink(endpoint: link!)
     }
     override func awakeFromNib() {
         super.awakeFromNib()

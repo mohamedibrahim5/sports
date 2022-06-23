@@ -8,7 +8,7 @@
 import UIKit
 
 class LeaguesDetailesCollectionViewCelldown: UICollectionViewCell {
-    @IBOutlet weak var imagev: UIImageView!
     
+    @IBOutlet weak var imagev: UIImageView!
     @IBOutlet weak var home: UILabel!
 }

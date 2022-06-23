@@ -9,9 +9,13 @@ import UIKit
 
 class LeaguesDetailesTableViewCell: UITableViewCell {
 
+    
     @IBOutlet weak var time: UILabel!
-    @IBOutlet weak var data: UILabel!
+    
     @IBOutlet weak var event: UILabel!
+    
+    @IBOutlet weak var data: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

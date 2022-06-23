@@ -82,3 +82,22 @@ class EventsNetworkManger:EventsService {
     }
 
 }
+
+// Latestevent
+class LatestEventsNetworkManger:LatestEventsService {
+    func fetchLeagues(endPoint: String, completion: @escaping (([LatestEvent]?, Error?) -> Void)) {
+        if let  url = URL(string: UrlServices4(endPoint: endPoint).url) {
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if let data = data {
+                    let decodedArray:LatestEvents! = convertFromJson(data: data)
+                    completion(decodedArray.event,nil)
+                }
+                if let error = error {
+                    completion(nil, error)
+                }
+            }.resume()
+        }
+    }
+
+}
+

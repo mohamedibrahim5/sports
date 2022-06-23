@@ -34,10 +34,9 @@ extension FavouriteViewController : UITableViewDelegate,UITableViewDataSource{
         cell.textlabell.text = arr[indexPath.row].name
         cell.imageview.loadFrom(URLAddress: arr[indexPath.row].image!)
         cell.link = arr[indexPath.row].sport
+        cell.gotoyoutube = self
         return cell
     }
-
-
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         80
     }
@@ -63,9 +62,10 @@ extension FavouriteViewController : UITableViewDelegate,UITableViewDataSource{
 
 extension FavouriteViewController:Gotoyoutube{
     func getlink(endpoint: String) {
-        if let url = URL(string: "https://google.com") {
+        if let url = URL(string: "https:\(endpoint)") {
            let vc = SFSafariViewController(url: url)
            self.present(vc, animated: true, completion: nil)
-       }
+      }
+        print("helloworld")
     }
 }

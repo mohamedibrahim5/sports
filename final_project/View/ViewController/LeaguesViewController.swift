@@ -78,7 +78,8 @@ extension LeaguesViewController : UITableViewDelegate,UITableViewDataSource{
         vc.checkyoutube = leaguesArray.filter({$0.strSport == checkLeagues})[indexPath.row].strYoutube!
             vc.leg = leaguesArray.filter({$0.strSport == checkLeagues})[indexPath.row]
          print(leaguesArray[indexPath.row].strYoutube!)
-            navigationController?.pushViewController(vc, animated: true)
+          present(vc, animated: true, completion: nil)
+        //    navigationController?.pushViewController(vc, animated: true)
     }
 }
 extension LeaguesViewController{

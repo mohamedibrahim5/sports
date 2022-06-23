@@ -9,7 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var test: UICollectionView!
+    @IBOutlet var test: UICollectionView!
+    
     var usersArray = [Sport]()
 
     override func viewDidLoad() {
