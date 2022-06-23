@@ -73,7 +73,9 @@ extension LeaguesViewController : UITableViewDelegate,UITableViewDataSource{
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "down") as!
             LeaguesDetailesViewController
    
-            vc.checkstrname = leaguesArray.filter({$0.strSport == checkLeagues})[indexPath.row].strLeague!
+        vc.checkstrname = leaguesArray.filter({$0.strSport == checkLeagues})[indexPath.row].strLeague!
+        vc.checkimage = leaguesArray.filter({$0.strSport == checkLeagues})[indexPath.row].strBadge!
+        vc.checkyoutube = leaguesArray.filter({$0.strSport == checkLeagues})[indexPath.row].strYoutube!
             vc.leg = leaguesArray.filter({$0.strSport == checkLeagues})[indexPath.row]
          print(leaguesArray[indexPath.row].strYoutube!)
             navigationController?.pushViewController(vc, animated: true)

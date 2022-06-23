@@ -6,14 +6,21 @@
 //
 
 import UIKit
-
+protocol Gotoyoutube {
+    func getlink (endpoint : String)
+}
 class favouriteTableViewCell: UITableViewCell {
+    
+    
+    var link : String?
+    var gotoyoutube : Gotoyoutube?
     
     @IBOutlet weak var textlabell: UILabel!
     @IBOutlet weak var imageview: UIImageView!
     @IBOutlet weak var textlabel: UIView!
     @IBAction func youtubebutton(_ sender: UIButton) {
-        
+        print("hello")
+        gotoyoutube?.getlink(endpoint: link!)
     }
     override func awakeFromNib() {
         super.awakeFromNib()

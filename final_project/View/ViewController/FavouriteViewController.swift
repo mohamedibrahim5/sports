@@ -6,12 +6,11 @@
 //
 
 import UIKit
-
+import SafariServices
 class FavouriteViewController: UIViewController {
     var db = DBmanger.sharedInstance
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    var arrtest : [String]?
-    var arr : [Fav]?
+    var arr = [Fav]()
     @IBOutlet weak var tableview: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,19 +21,19 @@ class FavouriteViewController: UIViewController {
           
         }
     }
-   
-    
 }
 
 extension FavouriteViewController : UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return arr?.count ?? 0
+        return arr.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! favouriteTableViewCell
-        cell.textlabell.text = arr![indexPath.row].name
+        cell.textlabell.text = arr[indexPath.row].name
+        cell.imageview.loadFrom(URLAddress: arr[indexPath.row].image!)
+        cell.link = arr[indexPath.row].sport
         return cell
     }
 
@@ -60,4 +59,13 @@ extension FavouriteViewController : UITableViewDelegate,UITableViewDataSource{
 //
 //
 //    }
+}
+
+extension FavouriteViewController:Gotoyoutube{
+    func getlink(endpoint: String) {
+        if let url = URL(string: "https://google.com") {
+           let vc = SFSafariViewController(url: url)
+           self.present(vc, animated: true, completion: nil)
+       }
+    }
 }

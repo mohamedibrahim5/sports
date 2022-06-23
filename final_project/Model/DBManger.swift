@@ -21,11 +21,6 @@ class DBmanger {
     }
 }
 
-
-
-
-
-
 extension DBmanger {
     
     
@@ -57,6 +52,26 @@ extension DBmanger {
         if let entity = NSEntityDescription.entity(forEntityName: "Fav", in: managedContext){
             let leg1 = NSManagedObject(entity: entity, insertInto: managedContext)
             leg1.setValue(strname, forKey: "name")
+            do{
+                try managedContext.save()
+                print("data is saved")
+            }catch let error as NSError{
+                print("Error in Saving")
+                print(error.localizedDescription)
+            }
+            
+        }
+        
+    }
+    
+    func addimageandytblink(appDelegate : AppDelegate ,strname : String, strimage : String,stryoutbe:String){
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        if let entity = NSEntityDescription.entity(forEntityName: "Fav", in: managedContext){
+            let leg1 = NSManagedObject(entity: entity, insertInto: managedContext)
+            leg1.setValue(strname, forKey: "name")
+            leg1.setValue(strimage, forKey: "image")
+            leg1.setValue(stryoutbe, forKey: "sport")
             do{
                 try managedContext.save()
                 print("data is saved")

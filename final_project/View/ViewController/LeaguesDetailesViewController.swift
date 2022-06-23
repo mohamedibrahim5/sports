@@ -14,10 +14,11 @@ class LeaguesDetailesViewController:UIViewController {
    
     @IBOutlet weak var tableview: UITableView!
     @IBAction func favourite(_ sender: UIButton) {
-        print("hello")
-        db.addMoviejsonind(appDelegate: appDelegate, strname: checkstrname)
+        db.addimageandytblink(appDelegate: appDelegate,strname: checkstrname, strimage: checkimage, stryoutbe: checkyoutube)
     }
     var checkstrname:String = ""
+    var checkimage : String = ""
+    var checkyoutube : String = ""
     var checkarrstr:[String] = []
     var leaguesDetailes = [LeaguesDetaile]()
     var leg:League?
